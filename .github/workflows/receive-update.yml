@@ -6,9 +6,10 @@ on:
     types: [plugin_update]
   workflow_dispatch:
     inputs:
-      plugin_data:
-        description: 'Plugin metadata JSON'
+      plugin_yaml:
+        description: 'Plugin metadata in YAML format'
         required: true
+        type: string
 
 jobs:
   update-metadata:
@@ -25,23 +26,32 @@ jobs:
       with:
         python-version: '3.9'
         
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
     - name: Extract plugin data
       id: extract
       run: |
         # 从repository_dispatch事件获取数据
         if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-          PLUGIN_DATA='${{ toJson(github.event.client_payload) }}'
+          # 直接从client_payload获取YAML
+          echo 'PLUGIN_YAML<<EOF' >> $GITHUB_ENV
+          echo '${{ toJson(github.event.client_payload) }}' | python3 -c "import sys, json, yaml; data=json.load(sys.stdin); print(yaml.dump(data))" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
         else
-          PLUGIN_DATA='${{ github.event.inputs.plugin_data }}'
+          # 从手动触发输入获取
+          echo 'PLUGIN_YAML<<EOF' >> $GITHUB_ENV
+          echo '${{ github.event.inputs.plugin_yaml }}' >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
         fi
-        echo "PLUGIN_DATA=$PLUGIN_DATA" >> $GITHUB_ENV
         
     - name: Update plugin metadata
       run: |
-        python scripts/update_metadata.py "$PLUGIN_DATA"
+        python scripts/update_metadata.py "$PLUGIN_YAML"
         
     - name: Commit and push changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        commit_message: "Update plugin metadata from ${{ github.event.client_payload.plugin_id || 'external' }}"
+        commit_message: "Update plugin: ${{ github.event.client_payload.name || 'unknown' }}"
         file_pattern: 'plugins.json'

@@ -1,0 +1,47 @@
+# .github/workflows/receive-update.yml
+name: Receive Plugin Update
+
+on:
+  repository_dispatch:
+    types: [plugin_update]
+  workflow_dispatch:
+    inputs:
+      plugin_data:
+        description: 'Plugin metadata JSON'
+        required: true
+
+jobs:
+  update-metadata:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Extract plugin data
+      id: extract
+      run: |
+        # 从repository_dispatch事件获取数据
+        if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+          PLUGIN_DATA='${{ toJson(github.event.client_payload) }}'
+        else
+          PLUGIN_DATA='${{ github.event.inputs.plugin_data }}'
+        fi
+        echo "PLUGIN_DATA=$PLUGIN_DATA" >> $GITHUB_ENV
+        
+    - name: Update plugin metadata
+      run: |
+        python scripts/update_metadata.py "$PLUGIN_DATA"
+        
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Update plugin metadata from ${{ github.event.client_payload.plugin_id || 'external' }}"
+        file_pattern: 'plugins.json'

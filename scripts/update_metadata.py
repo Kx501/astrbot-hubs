@@ -3,7 +3,7 @@ import json
 import os
 import sys
 import yaml
-import requests
+import urllib.request
 from pathlib import Path
 
 GITHUB_TOKEN = os.getenv("HUB_TOKEN") or os.getenv("GITHUB_TOKEN")

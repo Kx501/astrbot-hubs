@@ -1,4 +1,18 @@
 {
+  "astrbot_plugin_markdown_killer_fork": {
+    "display_name": "astrbot_plugin_markdown_killer_fork",
+    "desc": "移除LLM输出中的Markdown格式",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_markdown_killer_fork",
+    "tags": [
+      "格式化"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "0.0.5",
+    "updated_at": "2025-12-15T15:02:39Z",
+    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_markdown_killer_fork/main/logo.png"
+  },
   "astrbot_plugin_media_api": {
     "display_name": "api媒体资源获取",
     "desc": "",

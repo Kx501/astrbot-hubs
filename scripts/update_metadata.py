@@ -5,6 +5,7 @@ import sys
 import yaml
 import urllib.request
 from pathlib import Path
+from datetime import datetime, timezone
 
 GITHUB_TOKEN = os.getenv("HUB_TOKEN") or os.getenv("GITHUB_TOKEN")
 
@@ -55,8 +56,10 @@ def convert_to_official_format(plugin_data):
     tags = plugin_data.get("tags") or []
 
     info = fetch_repo_info(owner, repo)
-    stars = info.get("stargazers_count")
+    stars = info.get("stargazers_count") or 0
     updated_at = info.get("pushed_at") or info.get("updated_at")
+    if not updated_at:
+        updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     branch = info.get("default_branch") or "main"
 
     logo = detect_logo(owner, repo, branch)

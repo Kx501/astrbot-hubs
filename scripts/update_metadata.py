@@ -3,89 +3,98 @@ import json
 import os
 import sys
 import yaml
-from datetime import datetime
+import requests
 from pathlib import Path
 
+GITHUB_TOKEN = os.getenv("HUB_TOKEN") or os.getenv("GITHUB_TOKEN")
+
 def load_yaml_content(yaml_content):
-    """从YAML字符串加载内容"""
     try:
         return yaml.safe_load(yaml_content)
-    except:
-        # 如果传入的是字典
-        if isinstance(yaml_content, dict):
-            return yaml_content
+    except Exception:
+        return yaml_content if isinstance(yaml_content, dict) else {}
+
+def parse_owner_repo(repo_url: str):
+    parts = repo_url.rstrip("/").split("/")
+    if len(parts) >= 2:
+        return parts[-2], parts[-1]
+    return "", ""
+
+def fetch_repo_info(owner, repo):
+    if not (owner and repo):
         return {}
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    try:
+        r = requests.get(f"https://api.github.com/repos/{owner}/{repo}", headers=headers, timeout=5)
+        if r.ok:
+            return r.json()
+    except Exception:
+        pass
+    return {}
+
+def detect_logo(owner, repo, branch):
+    if not (owner and repo):
+        return ""
+    url = f"https://raw.githubusercontent.com/{owner}/{repo}/{branch}/logo.png"
+    headers = {"Authorization": f"token {GITHUB_TOKEN}"} if GITHUB_TOKEN else {}
+    try:
+        r = requests.head(url, headers=headers, timeout=5)
+        if r.ok:
+            return url
+    except Exception:
+        pass
+    return ""
 
 def convert_to_official_format(plugin_data):
-    """将metadata.yaml格式转换为官方插件格式"""
-    
-    # 插件ID生成逻辑
-    if "name" in plugin_data:
-        # 从name字段生成ID
-        name = plugin_data["name"]
-        if name.startswith("astrbot_plugin_"):
-            plugin_id = name
-        else:
-            plugin_id = f"astrbot_plugin_{name}_fork"
-    else:
-        # 从仓库URL提取
-        repo_url = plugin_data.get("repo", "")
-        if "github.com" in repo_url:
-            repo_name = repo_url.split("/")[-1]
-            plugin_id = f"astrbot_plugin_{repo_name}_fork"
-        else:
-            plugin_id = f"astrbot_plugin_unknown_fork"
-    
-    # 构建官方格式
+    repo_url = plugin_data.get("repo", "").rstrip("/")
+    owner, repo = parse_owner_repo(repo_url)
+
+    # 字典 key 用仓库名，退回 name 或 unknown
+    plugin_id = repo or plugin_data.get("name", "unknown_plugin")
+
+    tags = plugin_data.get("tags") or []
+
+    info = fetch_repo_info(owner, repo)
+    stars = info.get("stargazers_count")
+    updated_at = info.get("pushed_at") or info.get("updated_at")
+    branch = info.get("default_branch") or "main"
+
+    logo = detect_logo(owner, repo, branch)
+
     formatted = {
-        "display_name": plugin_data.get("name", "").replace("_fork", "").replace("_", " ").title(),
+        "display_name": plugin_data.get("name", ""),
         "desc": plugin_data.get("desc", ""),
-        "author": plugin_data.get("author", "Kx501"),
-        "repo": plugin_data.get("repo", ""),
-        "tags": plugin_data.get("tags", []),
-        "social_link": f"https://github.com/{plugin_data.get('author', 'Kx501')}",
-        "stars": plugin_data.get("stars", 0),
-        "version": plugin_data.get("version", "v1.0.0"),
-        "updated_at": datetime.now().strftime('%Y-%m-%dT%H:%M:%SZ'),
-        "logo": plugin_data.get("logo", "")
+        "author": plugin_data.get("author", ""),
+        "repo": repo_url,
+        "tags": tags,
+        "social_link": f"https://github.com/{owner}" if owner else "",
+        "stars": stars,
+        "version": plugin_data.get("version", ""),
+        "updated_at": updated_at,
+        "logo": logo,
     }
-    
     return plugin_id, formatted
 
 def update_plugin_metadata(plugin_yaml):
-    """更新或添加插件元数据"""
-    
-    # 加载YAML数据
     plugin_data = load_yaml_content(plugin_yaml)
-    
-    # 读取现有的plugins.json
+
     plugins_file = Path("plugins.json")
     if plugins_file.exists():
-        with open(plugins_file, 'r', encoding='utf-8') as f:
+        with plugins_file.open("r", encoding="utf-8") as f:
             all_plugins = json.load(f)
     else:
         all_plugins = {}
-    
-    # 转换为官方格式
+
     plugin_id, formatted_data = convert_to_official_format(plugin_data)
-    
-    # 更新数据
     all_plugins[plugin_id] = formatted_data
-    
-    # 保存
-    with open(plugins_file, 'w', encoding='utf-8') as f:
+
+    with plugins_file.open("w", encoding="utf-8") as f:
         json.dump(all_plugins, f, ensure_ascii=False, indent=2)
-    
+
     return plugin_id, formatted_data
 
 if __name__ == "__main__":
-    # 从环境变量或参数获取YAML数据
-    if len(sys.argv) > 1:
-        plugin_yaml = sys.argv[1]
-    else:
-        plugin_yaml = os.environ.get('PLUGIN_YAML', '{}')
-    
+    plugin_yaml = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("PLUGIN_YAML", "{}")
     plugin_id, updated_data = update_plugin_metadata(plugin_yaml)
-    
     print(f"Updated plugin: {plugin_id}")
     print(json.dumps({plugin_id: updated_data}, ensure_ascii=False, indent=2))

@@ -12,5 +12,21 @@
     "version": "v3.1.9",
     "updated_at": "2025-12-15T09:13:54Z",
     "logo": ""
+  },
+  "media_api": {
+    "display_name": "api媒体资源获取",
+    "desc": "",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/media_api",
+    "tags": [
+      "媒体资源",
+      "第三方api",
+      "工具"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "v1.0.0",
+    "updated_at": "2025-12-15T12:21:53Z",
+    "logo": ""
   }
 }

@@ -1,16 +1,4 @@
 {
-  "astrbot_plugin_meme_manager_fork_fork": {
-    "display_name": "Meme Manager",
-    "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
-    "author": "Kx501",
-    "repo": "https://github.com/kx501/astrbot_plugin_meme_manager",
-    "tags": [],
-    "social_link": "https://github.com/Kx501",
-    "stars": 0,
-    "version": "v3.19",
-    "updated_at": "2025-12-14T16:47:02Z",
-    "logo": ""
-  },
   "astrbot_plugin_meme_manager": {
     "display_name": "meme_manager_fork",
     "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",

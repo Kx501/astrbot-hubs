@@ -13,7 +13,7 @@
     "updated_at": "2025-12-15T09:13:54Z",
     "logo": ""
   },
-  "media_api": {
+  "astrbot_plugin_media_api": {
     "display_name": "api媒体资源获取",
     "desc": "",
     "author": "Kx501",

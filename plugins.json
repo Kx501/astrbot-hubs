@@ -11,18 +11,6 @@
     "updated_at": "2026-01-05T03:13:14Z",
     "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager_fork/main/logo.png"
   },
-  "MCSManager助手": {
-    "display_name": "MCSManager助手",
-    "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",
-    "author": "5060ti个马力的2099、Kx501",
-    "repo": "",
-    "tags": [],
-    "social_link": "",
-    "stars": 0,
-    "version": "2.0.25.12.WNMCNXM",
-    "updated_at": "2026-01-05T03:31:47Z",
-    "logo": ""
-  },
   "astrbot_plugin_markdown_killer_fork": {
     "display_name": "astrbot_plugin_markdown_killer_fork",
     "desc": "移除LLM输出中的Markdown格式",

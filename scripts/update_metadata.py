@@ -56,7 +56,8 @@ def detect_logo(owner, repo, branch):
     return ""
 
 def convert_to_official_format(plugin_data):
-    repo_url = plugin_data.get("repo", "").rstrip("/")
+    repo_value = plugin_data.get("repo") or plugin_data.get("repo_url") or ""
+    repo_url = repo_value.rstrip("/") if isinstance(repo_value, str) else ""
     owner, repo = parse_owner_repo(repo_url)
 
     # 字典 key 用仓库名，退回 name 或 unknown

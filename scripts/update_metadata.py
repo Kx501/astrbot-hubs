@@ -78,7 +78,12 @@ def convert_to_official_format(plugin_data):
     branch = info.get("default_branch") or "main"
 
     logo = detect_logo(owner, repo, branch)
-
+    
+    # 处理版本号：如果以'v'开头，去掉'v'
+    version = plugin_data.get("version", "")
+    if version and isinstance(version, str) and version.startswith('v'):
+    version = version[1:]
+    
     formatted = {
         "display_name": plugin_data.get("name", ""),
         "desc": plugin_data.get("desc", ""),

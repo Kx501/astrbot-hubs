@@ -17,21 +17,23 @@ jobs:
       - name: Read metadata.yaml
         id: read_metadata
         run: |
-          if [ -f "metadata.yaml" ]; then
-            METADATA_FILE="metadata.yaml"
-          elif [ -f "metadata.yml" ]; then
-            METADATA_FILE="metadata.yml"
-          else
-            echo "❌ Error: metadata.yaml or metadata.yml not found"
-            exit 1
-          fi
-          
           METADATA_JSON=$(python3 <<'PYTHON_EOF'
           import yaml
           import json
           import sys
+          import os
+          
+          # 在Python中检查文件
+          if os.path.exists("metadata.yaml"):
+              metadata_file = "metadata.yaml"
+          elif os.path.exists("metadata.yml"):
+              metadata_file = "metadata.yml"
+          else:
+              print("❌ Error: metadata.yaml or metadata.yml not found", file=sys.stderr)
+              sys.exit(1)
+          
           try:
-              with open('$METADATA_FILE', 'r', encoding='utf-8') as f:
+              with open(metadata_file, 'r', encoding='utf-8') as f:
                   data = yaml.safe_load(f)
               print(json.dumps(data or {}, ensure_ascii=False))
           except Exception as e:

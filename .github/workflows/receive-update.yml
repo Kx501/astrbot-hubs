@@ -28,23 +28,38 @@ jobs:
         
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        pip install pyyaml
         
-    - name: Extract plugin data
+    - name: Extract and validate plugin data
       id: extract
+      env:
+        GITHUB_REPOSITORY: ${{ github.event.client_payload.repo || github.event.repository.full_name }}
+        GITHUB_REF: ${{ github.event.client_payload.version || github.ref }}
       run: |
         # 从repository_dispatch事件获取数据
         if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-          # 直接从client_payload获取YAML
-          echo 'PLUGIN_YAML<<EOF' >> $GITHUB_ENV
-          echo '${{ toJson(github.event.client_payload) }}' | python3 -c "import sys, json, yaml; data=json.load(sys.stdin); print(yaml.dump(data))" >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          # 将client_payload转换为JSON字符串
+          PLUGIN_METADATA=$(echo '${{ toJson(github.event.client_payload) }}')
         else
-          # 从手动触发输入获取
-          echo 'PLUGIN_YAML<<EOF' >> $GITHUB_ENV
-          echo '${{ github.event.inputs.plugin_yaml }}' >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
+          # 从手动触发输入获取，先转换为JSON
+          PLUGIN_METADATA=$(echo '${{ github.event.inputs.plugin_yaml }}' | python3 -c "import sys, yaml, json; data=yaml.safe_load(sys.stdin) or {}; print(json.dumps(data))")
         fi
+        
+        echo "原始metadata:"
+        echo "$PLUGIN_METADATA" | python3 -m json.tool | head -20
+        
+        # 验证和修复metadata
+        VALIDATED_JSON=$(python3 scripts/validate_metadata.py "$PLUGIN_METADATA")
+        
+        echo "修复后的metadata:"
+        echo "$VALIDATED_JSON" | python3 -m json.tool | head -20
+        
+        # 转换为YAML格式供update_metadata.py使用
+        PLUGIN_YAML=$(echo "$VALIDATED_JSON" | python3 -c "import sys, json, yaml; data=json.load(sys.stdin); print(yaml.dump(data, allow_unicode=True, default_flow_style=False))")
+        
+        echo 'PLUGIN_YAML<<EOF' >> $GITHUB_ENV
+        echo "$PLUGIN_YAML" >> $GITHUB_ENV
+        echo 'EOF' >> $GITHUB_ENV
         
     - name: Update plugin metadata
       run: |

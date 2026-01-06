@@ -14,16 +14,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
       - name: Read metadata.yaml
         id: read_metadata
         run: |
-          METADATA_JSON=$(python3 <<'PYTHON_EOF'
+          python3 << 'EOF' > metadata_output.json
           import yaml
           import json
           import sys
           import os
           
-          # 在Python中检查文件，避免bash变量展开问题
           if os.path.exists("metadata.yaml"):
               metadata_file = "metadata.yaml"
           elif os.path.exists("metadata.yml"):
@@ -39,9 +46,9 @@ jobs:
           except Exception as e:
               print(f'Error: {e}', file=sys.stderr)
               sys.exit(1)
-          PYTHON_EOF
-          )
+          EOF
           
+          METADATA_JSON=$(cat metadata_output.json)
           echo "metadata_json<<EOF" >> $GITHUB_ENV
           echo "$METADATA_JSON" >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
@@ -51,7 +58,7 @@ jobs:
           HUB_TOKEN: ${{ secrets.HUB_PUSH_TOKEN }}
           METADATA_JSON: ${{ env.metadata_json }}
         run: |
-          DISPATCH_BODY=$(python3 <<'PYTHON_EOF'
+          python3 << 'EOF' > dispatch_payload.json
           import json
           import os
           metadata = json.loads(os.environ.get('METADATA_JSON', '{}'))
@@ -60,8 +67,9 @@ jobs:
               'client_payload': metadata
           }
           print(json.dumps(payload))
-          PYTHON_EOF
-          )
+          EOF
+          
+          DISPATCH_BODY=$(cat dispatch_payload.json)
           
           curl -X POST \
             -H "Authorization: token $HUB_TOKEN" \

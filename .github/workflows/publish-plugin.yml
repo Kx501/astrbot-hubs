@@ -1,0 +1,71 @@
+name: Publish Plugin (Reusable)
+
+on:
+  workflow_call:
+    secrets:
+      HUB_PUSH_TOKEN:
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Read metadata.yaml
+        id: read_metadata
+        run: |
+          if [ -f "metadata.yaml" ]; then
+            METADATA_FILE="metadata.yaml"
+          elif [ -f "metadata.yml" ]; then
+            METADATA_FILE="metadata.yml"
+          else
+            echo "❌ Error: metadata.yaml or metadata.yml not found"
+            exit 1
+          fi
+          
+          METADATA_JSON=$(python3 <<'PYTHON_EOF'
+          import yaml
+          import json
+          import sys
+          try:
+              with open('$METADATA_FILE', 'r', encoding='utf-8') as f:
+                  data = yaml.safe_load(f)
+              print(json.dumps(data or {}, ensure_ascii=False))
+          except Exception as e:
+              print(f'Error: {e}', file=sys.stderr)
+              sys.exit(1)
+          PYTHON_EOF
+          )
+          
+          echo "metadata_json<<EOF" >> $GITHUB_ENV
+          echo "$METADATA_JSON" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send to Plugin Hub
+        env:
+          HUB_TOKEN: ${{ secrets.HUB_PUSH_TOKEN }}
+          METADATA_JSON: ${{ env.metadata_json }}
+        run: |
+          DISPATCH_BODY=$(python3 <<'PYTHON_EOF'
+          import json
+          import os
+          metadata = json.loads(os.environ.get('METADATA_JSON', '{}'))
+          payload = {
+              'event_type': 'plugin_update',
+              'client_payload': metadata
+          }
+          print(json.dumps(payload))
+          PYTHON_EOF
+          )
+          
+          curl -X POST \
+            -H "Authorization: token $HUB_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Content-Type: application/json" \
+            https://api.github.com/repos/Kx501/astrbot-hubs/dispatches \
+            -d "$DISPATCH_BODY"
+          
+          echo "✅ 插件元数据已发送到中心"

@@ -23,7 +23,7 @@ jobs:
           import sys
           import os
           
-          # 在Python中检查文件
+          # 在Python中检查文件，避免bash变量展开问题
           if os.path.exists("metadata.yaml"):
               metadata_file = "metadata.yaml"
           elif os.path.exists("metadata.yml"):

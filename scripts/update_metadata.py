@@ -87,7 +87,7 @@ def convert_to_official_format(plugin_data):
         "tags": tags,  # 确保是数组
         "social_link": f"https://github.com/{owner}" if owner else "",
         "stars": stars,
-        "version": plugin_data.get("version", ""),,
+        "version": plugin_data.get("version", ""),
         "updated_at": updated_at,
         "logo": logo,
     }

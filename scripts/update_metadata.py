@@ -79,11 +79,6 @@ def convert_to_official_format(plugin_data):
 
     logo = detect_logo(owner, repo, branch)
     
-    # 处理版本号：如果以'v'开头，去掉'v'
-    version = plugin_data.get("version", "")
-    if version and isinstance(version, str) and version.startswith('v'):
-        version = version[1:]
-    
     formatted = {
         "display_name": plugin_data.get("name", ""),
         "desc": plugin_data.get("desc", ""),
@@ -92,7 +87,7 @@ def convert_to_official_format(plugin_data):
         "tags": tags,  # 确保是数组
         "social_link": f"https://github.com/{owner}" if owner else "",
         "stars": stars,
-        "version": version,
+        "version": plugin_data.get("version", ""),,
         "updated_at": updated_at,
         "logo": logo,
     }

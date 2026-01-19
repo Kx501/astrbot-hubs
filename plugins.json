@@ -1,4 +1,18 @@
 {
+  "astrbot_plugin_mcsmanager_fork": {
+    "display_name": "MCSManager助手",
+    "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",
+    "author": "5060ti个马力的2099、Kx501",
+    "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager_fork",
+    "tags": [
+      "面板"
+    ],
+    "social_link": "https://github.com/kx501",
+    "stars": 0,
+    "version": "2.0.25.13",
+    "updated_at": "2026-01-19T16:44:25Z",
+    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager_fork/main/logo.png"
+  },
   "astrbot_plugin_meme_manager": {
     "display_name": "meme_manager_fork",
     "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
@@ -12,18 +26,6 @@
     "version": "v3.2.0",
     "updated_at": "2026-01-06T17:18:59Z",
     "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_meme_manager/main/logo.png"
-  },
-  "astrbot_plugin_mcsmanager_fork": {
-    "display_name": "MCSManager助手",
-    "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",
-    "author": "5060ti个马力的2099、Kx501",
-    "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager_fork",
-    "tags": [],
-    "social_link": "https://github.com/kx501",
-    "stars": 0,
-    "version": "2.0.25.12.WNMCNXM",
-    "updated_at": "2026-01-05T03:13:14Z",
-    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager_fork/main/logo.png"
   },
   "astrbot_plugin_markdown_killer_fork": {
     "display_name": "astrbot_plugin_markdown_killer_fork",

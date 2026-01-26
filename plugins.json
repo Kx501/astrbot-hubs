@@ -5,12 +5,13 @@
     "author": "5060ti个马力的2099、Kx501",
     "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager_fork",
     "tags": [
-      "面板"
+      "面板",
+      "管理"
     ],
     "social_link": "https://github.com/kx501",
     "stars": 0,
-    "version": "2.0.25.13",
-    "updated_at": "2026-01-19T16:44:25Z",
+    "version": "2.0.25.14",
+    "updated_at": "2026-01-26T13:47:34Z",
     "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager_fork/main/logo.png"
   },
   "astrbot_plugin_meme_manager": {

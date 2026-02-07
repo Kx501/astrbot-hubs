@@ -92,7 +92,8 @@ def convert_to_official_format(plugin_data):
     
     # 构建格式化数据
     formatted = {
-        "display_name": plugin_data.get("name", ""),
+        "display_name": plugin_data.get("display_name", ""),
+        "name": plugin_data.get("name", ""),
         "desc": plugin_data.get("desc", ""),
         "author": plugin_data.get("author", ""),
         "repo": repo_url,

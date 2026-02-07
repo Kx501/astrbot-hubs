@@ -33,7 +33,8 @@ def validate_and_fix_metadata(metadata: Dict[str, Any], github_repo: str = "", g
     # 字段别名配置
     FIELD_ALIASES = {
         'repo': ['repo_url', 'repository', 'github'],
-        'name': ['plugin_name', 'display_name'],
+        'display_name': ['displayname', 'name'],
+        'name': ['plugin_name'],
         'desc': ['description', 'summary'],
         'author': ['authors', 'author_name'],
         'version': ['ver', 'v'],
@@ -43,10 +44,11 @@ def validate_and_fix_metadata(metadata: Dict[str, Any], github_repo: str = "", g
     # 字段自动生成规则
     AUTO_GENERATE_RULES = {
         'repo': lambda: f"https://github.com/{github_repo}" if github_repo else None,
+        'display_name': lambda: repo_name,
         'name': lambda: (
-            repo_name and
-            re.sub(r'^(astrbot_plugin_|astrbot-plugin-|plugin-)', '', repo_name)
-        ) or None,
+            (repo_name and re.sub(r'^(astrbot_plugin_|astrbot-plugin-|plugin-)', '', repo_name))
+            or None
+        ),
         'author': lambda: owner or None,
         'version': lambda: github_ref[10:] if github_ref and github_ref.startswith('refs/tags/') else None,
         'desc': lambda: '一个AstrBot插件',

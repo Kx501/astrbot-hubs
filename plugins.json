@@ -1,6 +1,6 @@
 {
   "astrbot_plugin_mcsmanager_fork": {
-    "display_name": "astrbot_plugin_mcsmanager",
+    "display_name": "MCSManager 助手",
     "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",
     "author": "5060ti个马力的2099、Kx501",
     "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager_fork",

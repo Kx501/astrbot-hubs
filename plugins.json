@@ -1,4 +1,21 @@
 {
+  "astrbot_plugin_apidog": {
+    "display_name": "ApiDog",
+    "name": "astrbot-hubs",
+    "desc": "低代码 API Web 管理平台。可视化配置任意 API 并自动绑定指令。支持媒体类数据、占位符、限流、认证、权限、计划任务等。",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_apidog",
+    "tags": [
+      "api",
+      "管理",
+      "低代码"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "1.1.2",
+    "updated_at": "2026-02-14T04:02:12Z",
+    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_apidog/main/logo.png"
+  },
   "astrbot_plugin_mcsmanager_fork": {
     "display_name": "MCSManager 助手",
     "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",

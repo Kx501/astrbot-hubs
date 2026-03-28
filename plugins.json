@@ -1,4 +1,19 @@
 {
+  "astrbot_plugin_meme_manager": {
+    "display_name": "表情包管理器",
+    "name": "astrbot-hubs",
+    "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
+    "author": "anka, Kx501",
+    "repo": "https://github.com/kx501/astrbot_plugin_meme_manager",
+    "tags": [
+      "表情包"
+    ],
+    "social_link": "https://github.com/kx501",
+    "stars": 0,
+    "version": "v3.2.0",
+    "updated_at": "2026-03-28T09:09:57Z",
+    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_meme_manager/main/logo.png"
+  },
   "astrbot_plugin_markdown_killer": {
     "display_name": "Markdown 杀手",
     "name": "astrbot-hubs",
@@ -45,20 +60,6 @@
     "version": "2.0.25.15",
     "updated_at": "2026-02-07T14:16:51Z",
     "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager/main/logo.png"
-  },
-  "astrbot_plugin_meme_manager": {
-    "display_name": "表情包管理器",
-    "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
-    "author": "anka, Kx501",
-    "repo": "https://github.com/kx501/astrbot_plugin_meme_manager",
-    "tags": [
-      "表情包"
-    ],
-    "social_link": "https://github.com/kx501",
-    "stars": 0,
-    "version": "v3.2.0",
-    "updated_at": "2026-01-06T17:18:59Z",
-    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_meme_manager/main/logo.png"
   },
   "astrbot_plugin_media_api": {
     "display_name": "api媒体资源获取",

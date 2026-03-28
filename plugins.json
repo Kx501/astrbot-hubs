@@ -31,26 +31,11 @@
     "updated_at": "2026-03-11T15:56:32Z",
     "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_apidog/main/logo.png"
   },
-  "astrbot_plugin_markdown_killer_fork": {
-    "display_name": "Markdown 杀手",
-    "name": "astrbot-hubs",
-    "desc": "移除LLM输出中的Markdown格式",
-    "author": "Kx501",
-    "repo": "https://github.com/Kx501/astrbot_plugin_markdown_killer_fork",
-    "tags": [
-      "格式化"
-    ],
-    "social_link": "https://github.com/Kx501",
-    "stars": 0,
-    "version": "0.1.0",
-    "updated_at": "2026-03-02T14:45:25Z",
-    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_markdown_killer_fork/main/logo.png"
-  },
-  "astrbot_plugin_mcsmanager_fork": {
+  "astrbot_plugin_mcsmanager": {
     "display_name": "MCSManager 助手",
     "desc": "可以通过指令管理mcsmanager内实例的插件:主要功能:通过指令开/关mcsm实例，mcsm节点状态（内存，cpu占用），查看实例列表",
     "author": "5060ti个马力的2099、Kx501",
-    "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager_fork",
+    "repo": "https://github.com/kx501/astrbot_plugin_mcsmanager",
     "tags": [
       "面板",
       "管理"
@@ -59,10 +44,10 @@
     "stars": 0,
     "version": "2.0.25.15",
     "updated_at": "2026-02-07T14:16:51Z",
-    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager_fork/main/logo.png"
+    "logo": "https://raw.githubusercontent.com/kx501/astrbot_plugin_mcsmanager/main/logo.png"
   },
   "astrbot_plugin_meme_manager": {
-    "display_name": "meme_manager_fork",
+    "display_name": "表情包管理器",
     "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
     "author": "anka, Kx501",
     "repo": "https://github.com/kx501/astrbot_plugin_meme_manager",

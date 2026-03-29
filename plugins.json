@@ -1,4 +1,19 @@
 {
+  "astrbot_plugin_msgprocessor": {
+    "display_name": "MsgProcessor",
+    "name": "astrbot-hubs",
+    "desc": "消息处理器，用于对消息进行多种个性化处理。",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
+    "tags": [
+      "文本处理"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "1.0.0",
+    "updated_at": "2026-03-29T17:33:35Z",
+    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/main/logo.png"
+  },
   "astrbot_plugin_meme_manager": {
     "display_name": "表情包管理器",
     "name": "astrbot-hubs",

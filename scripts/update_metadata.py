@@ -73,8 +73,8 @@ def convert_to_official_format(plugin_data):
     repo_url = (plugin_data.get("repo") or "").rstrip("/")
     owner, repo = parse_owner_repo(repo_url)
 
-    # 使用repo名称作为plugin_id，如果没有则使用name
-    plugin_id = repo or plugin_data.get("name", "unknown_plugin")
+    # 插件主键：metadata.yaml 的 name；否则回退为 GitHub 仓库名（与 JSON 顶层键一致）
+    plugin_id = (plugin_data.get("name") or "").strip() or repo or "unknown_plugin"
 
     # tags已经在前面的验证中确保是list类型，这里只需要确保不为None
     tags = plugin_data.get("tags") or []
@@ -90,10 +90,9 @@ def convert_to_official_format(plugin_data):
     # 检测logo
     logo = detect_logo(owner, repo, branch)
     
-    # 构建格式化数据
+    # 构建写入 plugins.json 的对象（不含 name：主键仅为顶层键）
     formatted = {
         "display_name": plugin_data.get("display_name", ""),
-        "name": plugin_data.get("name", ""),
         "desc": plugin_data.get("desc", ""),
         "author": plugin_data.get("author", ""),
         "repo": repo_url,
@@ -130,6 +129,11 @@ def update_plugin_metadata(plugin_yaml):
     for key, value in all_plugins.items():
         if key != plugin_id:  # 避免重复
             ordered_plugins[key] = value
+
+    # 去掉历史条目中的冗余 name（主键只在顶层键）
+    for entry in ordered_plugins.values():
+        if isinstance(entry, dict):
+            entry.pop("name", None)
 
     # 保存到文件
     with plugins_file.open("w", encoding="utf-8") as f:

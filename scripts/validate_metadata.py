@@ -7,7 +7,7 @@ import os
 import re
 import sys
 import yaml
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 
 def validate_and_fix_metadata(metadata: Dict[str, Any], github_repo: str = "", github_ref: str = "") -> Dict[str, Any]:
     """
@@ -51,10 +51,8 @@ def validate_and_fix_metadata(metadata: Dict[str, Any], github_repo: str = "", g
     AUTO_GENERATE_RULES = {
         'repo': lambda: f"https://github.com/{github_repo}" if github_repo else None,
         'display_name': lambda: repo_name,
-        'name': lambda: (
-            (repo_name and re.sub(r'^(astrbot_plugin_|astrbot-plugin-|plugin-)', '', repo_name))
-            or None
-        ),
+        # 与 metadata 约定一致：name 为插件 id（通常等于 GitHub 仓库名）
+        'name': lambda: repo_name or None,
         'author': lambda: owner or None,
         'version': lambda: github_ref[10:] if github_ref and github_ref.startswith('refs/tags/') else None,
         'desc': lambda: '一个AstrBot插件',

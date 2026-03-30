@@ -1,7 +1,7 @@
 {
   "astrbot_plugin_msgprocessor": {
     "display_name": "MsgProcessor",
-    "desc": "消息处理器，用于对消息进行多种个性化处理。",
+    "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
     "author": "Kx501",
     "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
     "tags": [
@@ -9,8 +9,8 @@
     ],
     "social_link": "https://github.com/Kx501",
     "stars": 0,
-    "version": "v1.2.0",
-    "updated_at": "2026-03-30T03:58:14Z",
+    "version": "1.2.0",
+    "updated_at": "2026-03-30T04:55:39Z",
     "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/main/logo.png"
   },
   "astrbot_plugin_meme_manager": {

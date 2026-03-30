@@ -33,7 +33,9 @@ jobs:
     - name: Extract and validate plugin data
       id: extract
       env:
-        GITHUB_REPOSITORY: ${{ github.event.client_payload.repo || github.event.repository.full_name }}
+        # 不在此注入 GITHUB_REPOSITORY：在 astrbot-hubs 上运行时其值为集市仓库，会误判插件名；
+        # client_payload.repo 多为完整 URL，也不适合按 owner/repo 拆分。
+        GITHUB_REPOSITORY: ''
         GITHUB_REF: ${{ github.event.client_payload.version || github.ref }}
       run: |
         # 从repository_dispatch事件获取数据

@@ -16,24 +16,30 @@ def validate_and_fix_metadata(metadata: Dict[str, Any], github_repo: str = "", g
     if metadata is None:
         metadata = {}
     
-    # 从GitHub仓库信息提取数据
-    if github_repo:
-        owner, repo_name = github_repo.split('/', 1) if '/' in github_repo else ('', github_repo)
-    else:
-        repo_url = metadata.get('repo', '') or metadata.get('repo_url', '')
-        if repo_url:
-            match = re.search(r'github\.com/([^/]+)/([^/]+)', repo_url)
+    # 推导插件所在仓库的 owner / 短名（用于自动生成字段）
+    # 必须优先使用 metadata 里的 repo URL：在 hub 仓库里跑工作流时，环境变量
+    # GITHUB_REPOSITORY 始终是「集市仓库」(如 */astrbot-hubs)，不能代表插件仓库。
+    owner, repo_name = '', ''
+    repo_url = (metadata.get('repo') or metadata.get('repo_url') or '').strip()
+    if repo_url:
+        match = re.search(r'github\.com/([^/]+)/([^/]+)', repo_url.rstrip('/'))
+        if match:
+            owner, repo_name = match.groups()
+    if not repo_name and github_repo:
+        if github_repo.startswith('http'):
+            match = re.search(r'github\.com/([^/]+)/([^/]+)', github_repo.rstrip('/'))
             if match:
                 owner, repo_name = match.groups()
-            else:
-                owner, repo_name = '', ''
+        elif '/' in github_repo:
+            owner, repo_name = github_repo.split('/', 1)
         else:
-            owner, repo_name = '', ''
+            repo_name = github_repo
     
     # 字段别名配置
     FIELD_ALIASES = {
         'repo': ['repo_url', 'repository', 'github'],
-        'display_name': ['displayname', 'name'],
+        # 勿把 name 当作 display_name 的别名：name 表示插件包名，与展示名不同
+        'display_name': ['displayname'],
         'name': ['plugin_name'],
         'desc': ['description', 'summary'],
         'author': ['authors', 'author_name'],

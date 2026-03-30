@@ -1,7 +1,6 @@
 {
   "astrbot_plugin_msgprocessor": {
     "display_name": "MsgProcessor",
-    "name": "astrbot-hubs",
     "desc": "消息处理器，用于对消息进行多种个性化处理。",
     "author": "Kx501",
     "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
@@ -16,7 +15,6 @@
   },
   "astrbot_plugin_meme_manager": {
     "display_name": "表情包管理器",
-    "name": "astrbot-hubs",
     "desc": "修改自anka/astrbot_plugin_meme_manager, 更多信息与功能预览请前往仓库页面查看:https://github.com/kx501/astrbot_plugin_meme_manager",
     "author": "anka, Kx501",
     "repo": "https://github.com/kx501/astrbot_plugin_meme_manager",
@@ -31,7 +29,6 @@
   },
   "astrbot_plugin_markdown_killer": {
     "display_name": "Markdown 杀手",
-    "name": "astrbot-hubs",
     "desc": "移除LLM输出中的Markdown格式",
     "author": "Kx501",
     "repo": "https://github.com/Kx501/astrbot_plugin_markdown_killer",
@@ -46,7 +43,6 @@
   },
   "astrbot_plugin_apidog": {
     "display_name": "ApiDog",
-    "name": "astrbot-hubs",
     "desc": "低代码 API Web 管理平台。可视化配置任意 API 并自动注册指令或工具。支持媒体类数据、占位符、限流、认证、权限、计划任务等。",
     "author": "Kx501",
     "repo": "https://github.com/Kx501/astrbot_plugin_apidog",

@@ -19,7 +19,7 @@
     "display_name": "MsgProcessor",
     "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
     "author": "Kx501",
-    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
+    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor/tree/astrbot",
     "tags": [
       "文本处理"
     ],

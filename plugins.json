@@ -1,4 +1,18 @@
 {
+  "astrbot_plugin_msgprocessor": {
+    "display_name": "MsgProcessor",
+    "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
+    "tags": [
+      "文本处理"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "1.3.1",
+    "updated_at": "2026-05-16T12:17:01Z",
+    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/astrbot/logo.png"
+  },
   "astrbot_plugin_apidog": {
     "display_name": "ApiDog",
     "desc": "低代码 API Web 管理平台。可视化配置任意 API 并自动注册指令或工具。支持媒体类数据、占位符、限流、认证、权限、计划任务等。",
@@ -14,20 +28,6 @@
     "version": "1.5.3",
     "updated_at": "2026-04-09T02:48:00Z",
     "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_apidog/main/logo.png"
-  },
-  "astrbot_plugin_msgprocessor": {
-    "display_name": "MsgProcessor",
-    "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
-    "author": "Kx501",
-    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor/tree/astrbot",
-    "tags": [
-      "文本处理"
-    ],
-    "social_link": "https://github.com/Kx501",
-    "stars": 0,
-    "version": "1.2.3",
-    "updated_at": "2026-04-02T09:00:26Z",
-    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/main/logo.png"
   },
   "astrbot_plugin_meme_manager": {
     "display_name": "表情包管理器",

@@ -5,12 +5,13 @@
     "author": "Kx501",
     "repo": "https://github.com/Kx501/astrbot_plugin_msgdebugger",
     "tags": [
-      "调试,开发"
+      "调试",
+      "开发"
     ],
     "social_link": "https://github.com/Kx501",
     "stars": 0,
     "version": "1.0.0",
-    "updated_at": "2026-06-09T08:49:36Z",
+    "updated_at": "2026-06-09T08:54:33Z",
     "logo": ""
   },
   "astrbot_plugin_msgprocessor": {

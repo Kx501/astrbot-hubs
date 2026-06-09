@@ -1,4 +1,18 @@
 {
+  "astrbot_plugin_msgprocessor": {
+    "display_name": "MsgProcessor",
+    "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
+    "tags": [
+      "文本处理"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "1.4.0",
+    "updated_at": "2026-06-09T03:47:33Z",
+    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/astrbot/logo.png"
+  },
   "astrbot_plugin_msgdebugger": {
     "display_name": "MsgDebugger",
     "desc": "复读用户消息，调试被动回复与主动推送的出站处理链路。",
@@ -13,20 +27,6 @@
     "version": "1.0.0",
     "updated_at": "2026-06-09T08:54:33Z",
     "logo": ""
-  },
-  "astrbot_plugin_msgprocessor": {
-    "display_name": "MsgProcessor",
-    "desc": "消息处理器，用于对消息进行多种个性化处理，支持网页配置。",
-    "author": "Kx501",
-    "repo": "https://github.com/Kx501/astrbot_plugin_msgprocessor",
-    "tags": [
-      "文本处理"
-    ],
-    "social_link": "https://github.com/Kx501",
-    "stars": 0,
-    "version": "1.3.1",
-    "updated_at": "2026-05-16T12:17:01Z",
-    "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/astrbot/logo.png"
   },
   "astrbot_plugin_apidog": {
     "display_name": "ApiDog",

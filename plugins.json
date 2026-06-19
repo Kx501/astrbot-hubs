@@ -1,4 +1,19 @@
 {
+  "astrbot_plugin_msgdebugger": {
+    "display_name": "MsgDebugger",
+    "desc": "复读用户消息并记录管线各阶段格式化日志，用于调试主被动出站与 LLM 注入。",
+    "author": "Kx501",
+    "repo": "https://github.com/Kx501/astrbot_plugin_msgdebugger",
+    "tags": [
+      "调试",
+      "开发"
+    ],
+    "social_link": "https://github.com/Kx501",
+    "stars": 0,
+    "version": "1.1.1",
+    "updated_at": "2026-06-19T11:02:36Z",
+    "logo": ""
+  },
   "astrbot_plugin_infoinjection": {
     "display_name": "InfoInjection",
     "desc": "修改LLM请求上下文的插件。",
@@ -27,21 +42,6 @@
     "version": "1.4.0",
     "updated_at": "2026-06-09T03:47:33Z",
     "logo": "https://raw.githubusercontent.com/Kx501/astrbot_plugin_msgprocessor/astrbot/logo.png"
-  },
-  "astrbot_plugin_msgdebugger": {
-    "display_name": "MsgDebugger",
-    "desc": "复读用户消息，调试被动回复与主动推送的出站处理链路。",
-    "author": "Kx501",
-    "repo": "https://github.com/Kx501/astrbot_plugin_msgdebugger",
-    "tags": [
-      "调试",
-      "开发"
-    ],
-    "social_link": "https://github.com/Kx501",
-    "stars": 0,
-    "version": "1.0.0",
-    "updated_at": "2026-06-09T08:54:33Z",
-    "logo": ""
   },
   "astrbot_plugin_apidog": {
     "display_name": "ApiDog",
